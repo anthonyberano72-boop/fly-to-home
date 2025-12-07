@@ -1,4 +1,5 @@
 //----------------------------Menu
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
@@ -12,14 +13,16 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 }
+
 //----------------------------Audio
+
 using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
     [SerializeField] AudioSource musicScource;
 
-[Header("--------------Sounds-----------")]
+[Header("--------------Sounds-----------")] //To separate the component and audio in unity
     public AudioClip background;
 
     private void Start()
@@ -28,7 +31,9 @@ public class Audio : MonoBehaviour
         musicScource.Play();
     }
 }
+
 //--------------------------------------Background
+
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
@@ -45,7 +50,9 @@ public class background : MonoBehaviour
         bgRenderer.material.mainTextureOffset += new Vector2(speed * Time.deltaTime, 0);
     }
 }
+
 //----------------------------------------------Bird
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -87,7 +94,9 @@ public class Bird : MonoBehaviour
         birdIsAlive = false;
     }
 }
+
 //-----------------------------------Woodspawn/clone and random offset
+
 using UnityEngine;
 
 public class woodspawn : MonoBehaviour
@@ -131,7 +140,9 @@ public class woodspawn : MonoBehaviour
         );
     }
 }
+
 //---------------------------------------scoring and gameover screen display
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -160,7 +171,9 @@ public class wow_logic : MonoBehaviour
     }
 
 }
+
 //----------------------------- logic for scoring
+
 using UnityEngine;
 
 public class SHEESS : MonoBehaviour
@@ -180,7 +193,9 @@ public class SHEESS : MonoBehaviour
         }
     }
 }
+
 //--------------------------- woodmovemnt and deletion of cloned wood
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
