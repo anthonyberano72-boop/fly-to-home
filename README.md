@@ -1,3 +1,18 @@
+//----------------------------Menu
+using UnityEngine;
+using UnityEngine.SceneManagement;
+public class Menu : MonoBehaviour
+{
+    public void PlayGame()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+}
+//----------------------------Audio
 using UnityEngine;
 
 public class Audio : MonoBehaviour
@@ -13,7 +28,7 @@ public class Audio : MonoBehaviour
         musicScource.Play();
     }
 }
-
+//--------------------------------------Background
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
@@ -30,7 +45,7 @@ public class background : MonoBehaviour
         bgRenderer.material.mainTextureOffset += new Vector2(speed * Time.deltaTime, 0);
     }
 }
-
+//----------------------------------------------Bird
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -72,7 +87,7 @@ public class Bird : MonoBehaviour
         birdIsAlive = false;
     }
 }
-
+//-----------------------------------Woodspawn/clone and random offset
 using UnityEngine;
 
 public class woodspawn : MonoBehaviour
@@ -114,5 +129,74 @@ public class woodspawn : MonoBehaviour
             ),
             transform.rotation
         );
+    }
+}
+//---------------------------------------scoring and gameover screen display
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+public class wow_logic : MonoBehaviour
+{
+    public int playerScore;
+    public Text scoreText;
+    public GameObject GameOver;
+
+    [ContextMenu("Add Score")]
+    public void addScore(int scoreToAdd)
+    {
+        playerScore = playerScore + scoreToAdd;
+        scoreText.text = playerScore.ToString();
+    }
+
+
+    public void restartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void gameOver()
+    {
+        GameOver.SetActive(true);
+    }
+
+}
+//----------------------------- logic for scoring
+using UnityEngine;
+
+public class SHEESS : MonoBehaviour
+{
+    public wow_logic logic;
+
+    void Start()
+    {
+        logic = GameObject.FindGameObjectWithTag("score").GetComponent<wow_logic>();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 3)
+        {
+            logic.addScore(1);
+        }
+    }
+}
+//--------------------------- woodmovemnt and deletion of cloned wood
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class pipes : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public float deadZone = -45f;
+
+    void Update()
+    {
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+
+        if (transform.position.x < deadZone)
+        {
+            Debug.Log("Pipe goes bye bye");
+            Destroy(gameObject);
+        }
     }
 }
